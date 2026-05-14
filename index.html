@@ -198,7 +198,7 @@
       max-width: 520px; margin: 0 auto 18px;
       font-size: 1.08rem; color: var(--text-sub); line-height: 1.8;
     }
-    .hero-note { font-size: 0.82rem; color: var(--text-dimmer); margin-bottom: 50px; }
+    .hero-note { font-size: 0.82rem; color: var(--text-dimmer); margin-bottom: 22px; }
 
     /* ── 큐 시뮬레이터 (Hero) ── */
     .queue-sim {
@@ -753,6 +753,73 @@
       font-size: 0.87rem; color: var(--text-sub); line-height: 1.75;
     }
 
+    /* ── CTA 버튼 / 다운로드 진입점 ── */
+    .cta-row {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      justify-content: center;
+      margin: 0 0 48px;
+    }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px;
+      font-size: 0.95rem; font-weight: 600;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: transform .2s, box-shadow .25s, background .2s, color .2s, border-color .2s;
+    }
+    .cta-btn.primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 14px 36px var(--hero-glow);
+    }
+    .cta-btn.primary:hover {
+      transform: translateY(-2px);
+      background: var(--accent-raw);
+      color: #fff;
+      box-shadow: 0 18px 44px var(--hero-glow);
+    }
+    .cta-btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-str);
+    }
+    .cta-btn.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .nav-links a.nav-cta {
+      color: #fff; background: var(--accent);
+      padding: 5px 14px;
+    }
+    .nav-links a.nav-cta:hover {
+      background: var(--accent-raw); color: #fff;
+    }
+
+    /* ── FINAL CTA SECTION ── */
+    #final-cta { padding: 80px 0 100px; border-top: 1px solid var(--border); }
+    .final-cta-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius);
+      padding: 56px 32px 48px;
+      text-align: center;
+      box-shadow: 0 30px 80px var(--shadow);
+      transition: background .35s, border-color .35s, box-shadow .35s;
+    }
+    .final-cta-card h2 {
+      font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em;
+      margin: 0 0 12px;
+    }
+    .final-cta-card > p {
+      color: var(--text-sub);
+      font-size: 1rem;
+      margin: 0 auto 28px;
+      max-width: 480px;
+    }
+    .final-cta-card .cta-row { margin-bottom: 14px; }
+    .cta-note { font-size: 0.78rem; color: var(--text-dimmer); }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -828,6 +895,7 @@
       <li><a href="#analytics">분석</a></li>
       <li><a href="#quickstart">팁</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><a href="./download.html" class="nav-cta">다운로드</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="다크 / 화이트 테마 전환">
       <span class="theme-icon" id="themeIcon">&#x1F319;</span>
@@ -853,6 +921,11 @@
       완료되지 않은 일을 끝까지 관리할 수 있게 도와줍니다.
     </p>
     <p class="hero-note">Windows 전용 &middot; 무료 &middot; 로컬 저장</p>
+
+    <div class="cta-row">
+      <a class="cta-btn primary" href="./download.html">베타 다운로드 받기</a>
+      <a class="cta-btn secondary" href="#principle">먼저 원리부터 보기</a>
+    </div>
 
     <!-- 인터랙티브 큐 시뮬레이터 -->
     <div class="queue-sim" role="region" aria-label="큐 시뮬레이터 데모">
@@ -1372,6 +1445,20 @@
           앱 버전, OS 버전 등 최소한의 익명 진단 정보만 사용되며, 사용 통계는 별도 동의한 경우에만 수집합니다.
         </div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FINAL CTA ══════ -->
+<section id="final-cta">
+  <div class="container">
+    <div class="final-cta-card reveal">
+      <h2>이제 직접 써볼 시간이에요</h2>
+      <p>설치 1분, 실행 즉시. 잊혀진 일이 다시 보이기 시작합니다.</p>
+      <div class="cta-row">
+        <a class="cta-btn primary" href="./download.html">베타 다운로드 받기</a>
+      </div>
+      <p class="cta-note">Windows 10/11 &middot; 무료 &middot; 로컬 저장</p>
     </div>
   </div>
 </section>

@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TesQ Public Beta 다운로드</title>
+  <style>
+    :root,
+    [data-theme="dark"] {
+      --bg: #1c1c1e;
+      --surface: #26262a;
+      --surface-2: #222226;
+      --surface-3: #313135;
+      --border: #3a3a3e;
+      --border-soft: #2a2a2e;
+      --accent: #4da6e8;
+      --accent-raw: #007acc;
+      --accent-bg: #1f3a52;
+      --text: #f2f2f4;
+      --text-soft: #d0d0d4;
+      --text-muted: #9e9ea8;
+      --text-dim: #72727c;
+      --warn: #f0a04b;
+      --green: #6effa0;
+      --red: #ff9090;
+      --shadow: rgba(0, 0, 0, .45);
+      --nav-bg: rgba(28, 28, 30, .88);
+    }
+
+    [data-theme="light"] {
+      --bg: #f2f2f7;
+      --surface: #ffffff;
+      --surface-2: #fafafa;
+      --surface-3: #e9e9ef;
+      --border: #c6c6cc;
+      --border-soft: #d8d8de;
+      --accent: #0065cc;
+      --accent-raw: #0a84ff;
+      --accent-bg: #e0f0ff;
+      --text: #1c1c1e;
+      --text-soft: #3a3a3c;
+      --text-muted: #636366;
+      --text-dim: #8e8e93;
+      --warn: #c05000;
+      --green: #00804a;
+      --red: #cc2222;
+      --shadow: rgba(0, 0, 0, .12);
+      --nav-bg: rgba(242, 242, 247, .9);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent-raw) 18%, transparent), transparent 32rem),
+        linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 45%, transparent), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      transition: background .25s, color .25s;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border-soft);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-inner {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--text);
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 8px 18px color-mix(in srgb, var(--accent-raw) 22%, transparent);
+    }
+
+    .brand-wordmark .accent-letter { color: var(--accent); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .text-link {
+      color: var(--text-muted);
+      font-size: .88rem;
+      text-decoration: none;
+    }
+
+    .text-link:hover { color: var(--accent); }
+
+    .theme-button {
+      width: 38px;
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 76px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      align-items: center;
+      gap: 46px;
+    }
+
+    .badge-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 78%, transparent);
+      color: var(--text-soft);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .badge.beta {
+      border-color: color-mix(in srgb, var(--warn) 48%, var(--border));
+      background: color-mix(in srgb, var(--warn) 12%, var(--surface));
+      color: var(--warn);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 660px;
+      font-size: clamp(2.55rem, 7vw, 5rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .accent { color: var(--accent); }
+
+    .lead {
+      max-width: 640px;
+      margin: 22px 0 0;
+      color: var(--text-soft);
+      font-size: 1.12rem;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s, border-color .15s;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      background: var(--accent-raw);
+      color: white;
+      box-shadow: 0 18px 36px color-mix(in srgb, var(--accent-raw) 28%, transparent);
+    }
+
+    .button.secondary {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .download-note {
+      margin-top: 14px;
+      color: var(--text-muted);
+      font-size: .9rem;
+    }
+
+    .startup-help {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid color-mix(in srgb, var(--warn) 52%, var(--border));
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--warn) 14%, transparent), transparent 70%),
+        var(--surface-2);
+    }
+
+    .startup-help strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: .96rem;
+    }
+
+    .startup-help p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: .92rem;
+    }
+
+    .startup-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      margin-top: 12px;
+      font-size: .9rem;
+    }
+
+    .startup-links a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .startup-links a:hover {
+      text-decoration: underline;
+    }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+      max-width: 720px;
+    }
+
+    .trust-item {
+      min-height: 74px;
+      padding: 14px;
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--surface) 72%, transparent);
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: .9rem;
+      margin-bottom: 3px;
+    }
+
+    .trust-item span {
+      color: var(--text-muted);
+      font-size: .8rem;
+    }
+
+    .app-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      box-shadow: 0 28px 72px var(--shadow);
+      overflow: hidden;
+    }
+
+    .app-titlebar {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--border-soft);
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-size: .78rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .dot:nth-child(2) { background: var(--warn); }
+    .dot:nth-child(3) { background: var(--green); }
+
+    .mock-body {
+      padding: 18px;
+    }
+
+    .l3-lane {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 178px 34px;
+      align-items: stretch;
+      gap: 8px;
+      min-height: 186px;
+    }
+
+    .l3-lane.all-done {
+      grid-template-columns: 1fr;
+      place-items: center;
+    }
+
+    .l3-lane.all-done .l3-rail,
+    .l3-lane.all-done .l3-action {
+      display: none;
+    }
+
+    .l3-lane.all-done .l3-current {
+      width: 100%;
+      min-height: 186px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      display: grid;
+      grid-template-rows: 1fr;
+      place-items: center;
+    }
+
+    .l3-done-message {
+      color: var(--green);
+      font-size: .95rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .l3-rail {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 0 2px;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 24px);
+    }
+
+    .l3-current {
+      display: grid;
+      grid-template-rows: auto 1fr auto auto;
+      gap: 8px;
+      min-height: 186px;
+      padding: 14px 14px 12px;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      transition: transform .28s, opacity .28s;
+    }
+
+    .l3-action {
+      width: 34px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--accent-bg);
+      color: var(--text);
+      font-size: 1.6rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .l3-action:hover { opacity: .82; }
+
+    .mock-label {
+      color: var(--text-muted);
+      font-size: .76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+
+    .queue {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .task {
+      flex: 0 0 112px;
+      min-height: 98px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      background: var(--surface-2);
+      color: var(--text-soft);
+      transition: transform .28s, opacity .28s, border-color .28s, background .28s;
+    }
+
+    .task.active {
+      display: contents;
+    }
+
+    .tier {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .task:nth-child(2) .tier { background: var(--warn); }
+    .task:nth-child(3) .tier { background: var(--text-dim); }
+
+    .task[data-tier="active"] { border-color: color-mix(in srgb, var(--accent) 72%, var(--border)); }
+    .task[data-tier="normal"] { border-color: color-mix(in srgb, var(--warn) 72%, var(--border)); }
+    .task[data-tier="stalled"] { border-color: color-mix(in srgb, var(--text-dim) 72%, var(--border)); }
+
+    .task-title {
+      font-size: .83rem;
+      line-height: 1.45;
+      word-break: keep-all;
+    }
+
+    .tag {
+      color: var(--text-muted);
+      font-size: .75rem;
+    }
+
+    .l3-current .task-title {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .l3-meta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .tier-pill,
+    .defer-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 23px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--surface-3);
+      color: var(--text-muted);
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .tier-pill.active {
+      color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    .mini-actions {
+      display: grid;
+      grid-template-columns: 1fr 72px;
+      gap: 8px;
+    }
+
+    .mini-button {
+      height: 32px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--surface-3);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .mini-button:hover {
+      opacity: .82;
+    }
+
+    .mini-button.done { background: color-mix(in srgb, var(--green) 22%, var(--surface-3)); }
+    .mini-button.kill { background: color-mix(in srgb, var(--red) 18%, var(--surface-3)); }
+
+    section {
+      padding: 54px 0;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .section-head {
+      max-width: 680px;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .step,
+    .info-card,
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .step {
+      padding: 22px;
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      background: var(--accent-bg);
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .step h3,
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .step p,
+    .info-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: .92rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .info-card {
+      padding: 22px;
+    }
+
+    .warning {
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid color-mix(in srgb, var(--warn) 42%, var(--border));
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--warn) 10%, var(--surface));
+      color: var(--text-soft);
+    }
+
+    .warning strong {
+      color: var(--warn);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .faq-a {
+      display: none;
+      padding: 0 18px 18px;
+      color: var(--text-muted);
+      font-size: .92rem;
+    }
+
+    .faq-item.open .faq-a { display: block; }
+
+    .final-cta {
+      text-align: center;
+      padding: 64px 0 78px;
+    }
+
+    .final-cta p {
+      margin: 12px auto 24px;
+      max-width: 560px;
+      color: var(--text-muted);
+    }
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--border-soft);
+      color: var(--text-dim);
+      font-size: .85rem;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 6px;
+      background: var(--surface-3);
+      color: var(--text-soft);
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .9em;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .steps,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 54px;
+      }
+
+      .app-card {
+        max-width: 560px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, 1080px);
+      }
+
+      .nav-inner {
+        height: auto;
+        min-height: 58px;
+        padding: 8px 0;
+      }
+
+      .text-link {
+        display: none;
+      }
+
+      h1 {
+        font-size: 2.38rem;
+      }
+
+      .lead {
+        font-size: 1rem;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .trust-row {
+        grid-template-columns: 1fr;
+      }
+
+      .l3-lane {
+        grid-template-columns: 1fr 32px;
+      }
+
+      .l3-rail {
+        display: none;
+      }
+
+      .l3-current {
+        min-height: 170px;
+      }
+
+      .tag {
+        grid-column: auto;
+      }
+
+      section {
+        padding: 42px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="상단 내비게이션">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="TesQ 다운로드 페이지">
+        <img class="brand-mark" src="icons/TesQ.png" alt="" aria-hidden="true" />
+        <span class="brand-wordmark">Tes<span class="accent-letter">Q</span></span>
+      </a>
+      <div class="nav-actions">
+        <a class="text-link" href="./">자세히 보기</a>
+        <a class="text-link" href="#install">설치 안내</a>
+        <button class="theme-button" id="themeButton" type="button" aria-label="테마 전환">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge-row" aria-label="제품 상태">
+            <span class="badge beta">Public Beta</span>
+            <span class="badge">Windows</span>
+            <span class="badge">무료</span>
+            <span class="badge">로컬 저장</span>
+          </div>
+
+          <h1>모든 할 일이<br /><span class="accent">잊히지 않도록.</span></h1>
+          <p class="lead">
+            해야 할 일을 적어두고도 놓치지 않도록.
+            완료되지 않은 일을 끝까지 관리할 수 있게 도와줍니다.
+          </p>
+
+          <div class="cta-row">
+            <a class="button primary" href="https://tesq.jang2093.workers.dev/download/latest">
+              TesQ 베타 다운로드
+            </a>
+            <a class="button secondary" href="./">앱 소개 보기</a>
+          </div>
+          <p class="download-note">
+            다운로드 후 압축을 풀고 <code>TesQ.UI.exe</code>를 실행해 주세요.
+          </p>
+
+          <div class="startup-help" aria-label="처음 실행 문제 해결">
+            <strong>처음 실행이 막히면 여기부터 확인해 주세요.</strong>
+            <p>
+              앱이 열리지 않으면 .NET 8 Desktop Runtime이 필요할 수 있습니다.
+              Windows SmartScreen 확인 창이 뜨면 파일 출처를 확인한 뒤 진행해 주세요.
+            </p>
+            <div class="startup-links">
+              <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank" rel="noopener">.NET 8 Desktop Runtime 받기</a>
+              <a href="#first-run">처음 실행 안내 보기</a>
+            </div>
+          </div>
+
+          <div class="trust-row" aria-label="핵심 안내">
+            <div class="trust-item">
+              <strong>내 PC에 저장</strong>
+              <span>작업 데이터는 기본적으로 로컬에 보관됩니다.</span>
+            </div>
+            <div class="trust-item">
+              <strong>자동 업데이트</strong>
+              <span>베타 이후 업데이트를 앱 안에서 받을 수 있습니다.</span>
+            </div>
+            <div class="trust-item">
+              <strong>베타 안내</strong>
+              <span>실행 중 안내가 뜨면 아래의 처음 실행 전 안내를 확인해 주세요.</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="app-card" aria-label="TesQ 큐 미리보기">
+          <div class="app-titlebar">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span>TesQ 큐 미리보기</span>
+          </div>
+          <div class="mock-body">
+            <div class="l3-lane">
+              <div class="l3-rail" aria-label="뒤이어 오는 작업">
+                <div class="queue" id="queue">
+                  <div class="task" data-tier="normal" data-title="병원 예약 전화하기" data-tag="보통" data-defers="1×">
+                    <strong class="task-title">병원 예약 전화하기</strong>
+                    <span class="tag">보통 · 1×</span>
+                  </div>
+                  <div class="task" data-tier="stalled" data-title="냉장고 수리 문의" data-tag="정체" data-defers="4×">
+                    <strong class="task-title">냉장고 수리 문의</strong>
+                    <span class="tag">정체 · 4×</span>
+                  </div>
+                </div>
+              </div>
+              <div class="l3-current" id="currentTask">
+                <div class="mock-label">L3 · TASK</div>
+                <strong class="task-title" id="currentTitle">세금 신고 서류 준비</strong>
+                <div class="l3-meta">
+                  <span class="tier-pill active" id="currentTier" data-tier="active">활성</span>
+                  <span class="defer-pill" id="currentDefers">0×</span>
+                </div>
+                <div class="mini-actions">
+                  <button class="mini-button done" id="doneButton" type="button">✓ Done</button>
+                  <button class="mini-button kill" id="killButton" type="button">✕ Kill</button>
+                </div>
+              </div>
+              <button class="l3-action" id="deferButton" type="button" aria-label="현재 작업 미루기">›</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section id="install">
+      <div class="container">
+        <div class="section-head">
+          <h2>설치는 세 단계면 충분합니다.</h2>
+          <p>베타 기간에는 zip 파일로 배포합니다. 설치 프로그램 없이 압축을 풀고 실행하는 방식입니다.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-number">1</div>
+            <h3>다운로드</h3>
+            <p><code>TesQ.UI.zip</code>을 받은 뒤 원하는 폴더에 저장합니다.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">2</div>
+            <h3>압축 해제</h3>
+            <p>zip 파일의 압축을 풀고 폴더 안의 <code>TesQ.UI.exe</code>를 찾습니다.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">3</div>
+            <h3>실행</h3>
+            <p>exe를 실행합니다. 이후 업데이트는 앱 안의 안내에 따라 진행할 수 있습니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="first-run">
+      <div class="container">
+        <div class="section-head">
+          <h2>처음 실행 전 알아둘 것</h2>
+          <p>일부 PC에서는 Windows가 실행 전 확인 안내를 보여줄 수 있습니다.</p>
+        </div>
+        <div class="info-grid">
+          <article class="info-card">
+            <h3>실행에 필요한 구성 요소</h3>
+            <p>
+              앱이 바로 열리지 않고 Microsoft 구성 요소 설치를 안내할 수 있습니다.
+              안내가 나오면 <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank" rel="noopener">.NET 8 Desktop Runtime</a>을 설치한 뒤 다시 실행해 주세요.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Windows 확인 안내</h3>
+            <p>
+              처음 받은 앱이라 Windows가 "PC를 보호했습니다" 같은 확인 창을 띄울 수 있습니다.
+              파일 출처가 TesQ 다운로드 페이지인지 확인한 뒤 <strong>추가 정보</strong>와 <strong>실행</strong>을 선택해 주세요.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>로컬 데이터</h3>
+            <p>
+              작업 제목, 메모, 첨부파일 내용은 서버로 보내지 않습니다.
+              워크스페이스 데이터는 사용자 PC의 앱 데이터 폴더에 저장됩니다.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>공개 베타</h3>
+            <p>
+              지금은 먼저 써보고 의견을 모으는 공개 베타입니다.
+              사용 중 불편한 점은 이후 피드백 흐름으로 알려주세요.
+            </p>
+          </article>
+        </div>
+        <div class="warning">
+          <strong>권장:</strong> 처음 실행할 때는 압축을 푼 폴더 전체를 유지해 주세요.
+          exe만 따로 이동하면 업데이트나 보조 파일 접근이 예상과 다를 수 있습니다.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>자주 묻는 질문</h2>
+          <p>다운로드와 실행 과정에서 가장 먼저 마주칠 수 있는 질문만 모았습니다.</p>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              설치 프로그램이 없나요?
+              <span aria-hidden="true">⌄</span>
+            </button>
+            <div class="faq-a">
+              네. 지금은 zip 파일을 내려받아 압축을 풀고 실행하는 방식입니다.
+              실행에 필요한 구성 요소 안내가 나오면 .NET 8 Desktop Runtime을 설치한 뒤 다시 실행해 주세요.
+            </div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              인터넷 연결이 계속 필요한가요?
+              <span aria-hidden="true">⌄</span>
+            </button>
+            <div class="faq-a">
+              기본 작업 관리는 로컬에서 동작합니다. 다만 최신 버전 확인, 업데이트 다운로드, 사용자가 동의한 통계 전송에는 인터넷 연결이 필요할 수 있습니다.
+            </div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              어떤 정보가 수집되나요?
+              <span aria-hidden="true">⌄</span>
+            </button>
+            <div class="faq-a">
+              선택적 사용 통계는 사용자가 동의한 경우에만 전송됩니다.
+              작업 제목, 메모 내용, 첨부파일 내용, 체크리스트 내용은 수집하지 않습니다.
+            </div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              자세한 기능 소개는 어디서 볼 수 있나요?
+              <span aria-hidden="true">⌄</span>
+            </button>
+            <div class="faq-a">
+              <a href="./">소개 페이지</a>에서 순환 큐, Tier, 워크스페이스, 알람, 백업, 생산성 분석 등을 더 자세히 볼 수 있습니다.
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <h2>적어둔 일을 끝까지 다뤄주세요.</h2>
+        <p>다운로드는 여기서, TesQ가 모든 할 일을 잊히지 않게 관리하는 방식은 소개 페이지에서 이어서 볼 수 있습니다.</p>
+        <div class="cta-row" style="justify-content:center">
+          <a class="button primary" href="https://tesq.jang2093.workers.dev/download/latest">TesQ 베타 다운로드</a>
+          <a class="button secondary" href="./">자세히 살펴보기</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      TesQ Public Beta · Windows · 로컬 저장 · <a href="./">제품 소개</a>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      "use strict";
+
+      const html = document.documentElement;
+      const themeButton = document.getElementById("themeButton");
+      const savedTheme = localStorage.getItem("tesq-download-theme");
+      if (savedTheme === "light" || savedTheme === "dark") {
+        html.dataset.theme = savedTheme;
+      }
+
+      themeButton.addEventListener("click", function() {
+        const next = html.dataset.theme === "dark" ? "light" : "dark";
+        html.dataset.theme = next;
+        localStorage.setItem("tesq-download-theme", next);
+      });
+
+      const queue = document.getElementById("queue");
+      const currentTask = document.getElementById("currentTask");
+      const l3Lane = currentTask.closest(".l3-lane");
+      const deferButton = document.getElementById("deferButton");
+
+      const demoTasks = [
+        { title: "세금 신고 서류 준비", tier: 0, skips: 0 },
+        { title: "냉장고 수리 문의", tier: 2, skips: 4 },
+        { title: "병원 예약 전화하기", tier: 1, skips: 1 }
+      ];
+
+      function getTierKey(tier) {
+        return tier === 0 ? "active" : tier === 1 ? "normal" : "stalled";
+      }
+
+      function getTierLabel(tier) {
+        return tier === 0 ? "활성" : tier === 1 ? "보통" : "정체";
+      }
+
+      function createQueuedTask(item) {
+        const task = document.createElement("div");
+        task.className = "task";
+        task.dataset.tier = getTierKey(item.tier);
+        task.innerHTML =
+          '<strong class="task-title"></strong>' +
+          '<span class="tag"></span>';
+        task.querySelector(".task-title").textContent = item.title;
+        task.querySelector(".tag").textContent = getTierLabel(item.tier) + " · " + item.skips + "×";
+        return task;
+      }
+
+      function renderQueueDemo() {
+        queue.innerHTML = "";
+        currentTask.removeAttribute("style");
+
+        if (demoTasks.length === 0) {
+          l3Lane.classList.add("all-done");
+          currentTask.innerHTML =
+            '<div class="l3-done-message">✓ 모든 작업 완료!</div>';
+          deferButton.disabled = true;
+          deferButton.style.opacity = ".35";
+          return;
+        }
+
+        l3Lane.classList.remove("all-done");
+        deferButton.disabled = demoTasks.length <= 1;
+        deferButton.style.opacity = demoTasks.length <= 1 ? ".35" : "";
+
+        const visibleWaiting = Math.min(demoTasks.length - 1, 2);
+        for (let i = visibleWaiting; i >= 1; i--) {
+          queue.appendChild(createQueuedTask(demoTasks[i]));
+        }
+
+        const current = demoTasks[0];
+        currentTask.innerHTML =
+          '<div class="mock-label">L3 · TASK</div>' +
+          '<strong class="task-title" id="currentTitle"></strong>' +
+          '<div class="l3-meta">' +
+            '<span class="tier-pill" id="currentTier"></span>' +
+            '<span class="defer-pill" id="currentDefers"></span>' +
+          '</div>' +
+          '<div class="mini-actions">' +
+            '<button class="mini-button done" type="button" data-action="done">✓ Done</button>' +
+            '<button class="mini-button kill" type="button" data-action="kill">✕ Kill</button>' +
+          '</div>';
+        currentTask.querySelector("#currentTitle").textContent = current.title;
+        const tierPill = currentTask.querySelector("#currentTier");
+        tierPill.textContent = getTierLabel(current.tier);
+        tierPill.className = "tier-pill" + (current.tier === 0 ? " active" : "");
+        currentTask.querySelector("#currentDefers").textContent = current.skips + "×";
+      }
+
+      function animateCurrent(transform, afterAnimation) {
+        currentTask.style.opacity = "0";
+        currentTask.style.transform = transform;
+        setTimeout(function() {
+          afterAnimation();
+          renderQueueDemo();
+        }, 220);
+      }
+
+      deferButton.addEventListener("click", function() {
+        if (demoTasks.length <= 1) return;
+        animateCurrent("translateX(16px) scale(.98)", function() {
+          const item = demoTasks[0];
+          item.skips++;
+          if (item.skips >= 6) item.tier = 2;
+          else if (item.skips >= 3) item.tier = 1;
+          demoTasks.push(demoTasks.shift());
+        });
+      });
+
+      currentTask.addEventListener("click", function(event) {
+        const actionButton = event.target.closest("[data-action]");
+        if (!actionButton || demoTasks.length === 0) return;
+        const transform = actionButton.dataset.action === "kill"
+          ? "translateY(12px) scale(.96)"
+          : "translateY(-12px) scale(.96)";
+        animateCurrent(transform, function() {
+          demoTasks.shift();
+        });
+      });
+
+      renderQueueDemo();
+
+      document.querySelectorAll(".faq-q").forEach(function(button) {
+        button.addEventListener("click", function() {
+          const item = button.closest(".faq-item");
+          const open = item.classList.toggle("open");
+          button.setAttribute("aria-expanded", String(open));
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
